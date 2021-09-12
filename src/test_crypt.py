@@ -42,6 +42,7 @@ def files_exist():
     Check if the created test files exist. If not, return False
     :return: Boolean
     """
+    print(path.curdir)
     if (
         path.isdir("test/")
         and path.isdir("test/testr/")
@@ -55,12 +56,25 @@ def files_exist():
 
 class Crypt(unittest.TestCase):
     def test_make_files(self):
+        """
+        Make the test files and check if they exist.
+        :return: None
+        """
         self.assertEqual(make_folders_and_files(), True)
-
-    def test_initial_presence(self):
         self.assertEqual(files_exist(), True)
 
+    def test_removed_files(self):
+        """
+        Remove the files and make sure that they have truly been removed.
+        :return: None
+        """
+        self.assertEqual(files_exist(), False)
+
     def test_sanity(self):
+        """
+        Simple sanity test to check if the test cases are working as they are supposed to.
+        :return: None
+        """
         self.assertEqual("Hello", "Hello")
 
 
