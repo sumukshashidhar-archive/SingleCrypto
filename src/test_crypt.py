@@ -4,12 +4,13 @@ To test file and folder cryptography.
 
 import unittest
 import os
+import os.path as path
 
 
 def make_folders_and_files():
     """
     Generates a test folder with nested files.
-    :return: Boolean True or False
+    :return: Boolean
     """
     try:
         os.mkdir("test/")
@@ -26,7 +27,7 @@ def make_folders_and_files():
 def delete_folders_and_files():
     """
     Folder to clean up test files.
-    :return:
+    :return: Boolean
     """
     try:
         os.rmdir("test/")
@@ -36,7 +37,28 @@ def delete_folders_and_files():
         return False
 
 
+def files_exist():
+    """
+    Check if the created test files exist. If not, return False
+    :return: Boolean
+    """
+    if (
+        path.isdir("test/")
+        and path.isdir("test/testr/")
+        and path.isfile("test/a.txt")
+        and path.isfile("test/testr/b.txt")
+    ):
+        return True
+    return False
+
+
 class Crypt(unittest.TestCase):
+    def test_make_files(self):
+        self.assertEqual(make_folders_and_files(), True)
+
+    def test_initial_presence(self):
+        self.assertEqual(files_exist(), True)
+
     def test_sanity(self):
         self.assertEqual("Hello", "Hello")
 
