@@ -49,7 +49,8 @@ def files_exist():
         and path.isfile("test/testr/b.txt")
     ):
         return True
-    return False
+    else:
+        return False
 
 
 class Crypt(unittest.TestCase):
